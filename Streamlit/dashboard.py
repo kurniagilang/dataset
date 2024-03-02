@@ -21,7 +21,7 @@ def main():
     # Sidebar
     st.sidebar.header("**Gilang Kurnia Mandari**")
     st.sidebar.title("Bike Sharing Dashboard")
-    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot (Weather Situation)", "Box Plot (Holiday)", "Figure", "Season Counts"))
+    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot (Weather Situation)", "Box Plot (Holiday)","Box Plot (Season)", "Figure", "Season Counts"))
 
     # Main content
     st.title("Bike Sharing Dataset Analysis :sparkles: :sparkles:")
@@ -42,6 +42,14 @@ def main():
     elif selected_visualization == "Box Plot (Holiday)":
         st.subheader("Box Plot: Holiday vs Total Rentals")
         fig = px.box(data, x='holiday', y='cnt', title='Holiday vs Total Rentals')
+        st.plotly_chart(fig)
+
+    # Box plot (Season)
+    elif selected_visualization == "Box Plot (Season)":
+        st.subheader("Box Plot: Season vs Total Rentals")
+        fig = px.box(data, x='season', y='cnt', title='Season vs Total Rentals')
+        fig.update_xaxes(title_text='Musim')
+        fig.update_yaxes(title_text='Jumlah Sewa')
         st.plotly_chart(fig)
 
     # Figure
