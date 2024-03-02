@@ -19,8 +19,11 @@ def main():
     data = load_data()
 
     # Sidebar
+    st.header('Bike Sharing Dashboard :sparkles:')
+    st.sidebar.header("**Gilang Kurnia Mandari**")
     st.sidebar.title("Bike Sharing Dashboard")
     selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure", "Heatmap", "Season Counts"))
+   
 
     # Main content
     st.title("Bike Sharing Dataset Analysis")
