@@ -36,27 +36,6 @@ def main():
         st.subheader("Box Plot: Weather Situation vs Total Rentals")
         fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
         st.plotly_chart(fig)
-
-        # Season Counts
-    elif selected_visualization == "Season Counts":
-        st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
-
-        # Hitung frekuensi musim
-        season_counts = data['season'].value_counts()
-
-        # Plot countplot musim
-        fig, ax = plt.subplots(figsize=(5, 5))
-        sns.countplot(x='season', data=data, palette='pastel', ax=ax)
-        ax.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
-        ax.set_xlabel('Musim')
-        ax.set_ylabel('Jumlah Hari')
-        ax.set_xticks([0, 1, 2, 3], ['Spring', 'Summer', 'Fall', 'Winter'])
-        st.pyplot(fig)
-
-        # Tampilkan tabel frekuensi untuk variabel 'season'
-        st.write("Tabel Frekuensi untuk Variabel 'season':")
-        st.write(season_counts)
-
     
     # Figure
     elif selected_visualization == "Figure":
@@ -75,19 +54,13 @@ def main():
         st.write("Deskripsi Statistik untuk Variabel 'cnt':")
         st.write(cnt_stats)
 
+    # Heatmap
     elif selected_visualization == "Heatmap":
         st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
 
-    # Handling NaN values and verifying data
-    st.write("Before dropping NaN values:")
-    st.write(data.head())
+        # Handling NaN values
+        data_cleaned = data.dropna()
 
-    data_cleaned = data.dropna()
-
-    st.write("After dropping NaN values:")
-    st.write(data_cleaned.head())
-
-    try:
         # Hitung matriks korelasi
         correlation_matrix = data_cleaned.corr()
 
@@ -96,8 +69,26 @@ def main():
         sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
         plt.title('Heatmap of Correlation between Variables in Bike Sharing Dataset (per Day)')
         st.pyplot()
-    except ValueError as e:
-        st.error(f"Error computing correlation matrix: {e}")
+
+    # Season Counts
+    elif selected_visualization == "Season Counts":
+        st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
+
+        # Hitung frekuensi musim
+        season_counts = data['season'].value_counts()
+
+        # Plot countplot musim
+        fig, ax = plt.subplots(figsize=(5, 5))
+        sns.countplot(x='season', data=data, palette='pastel', ax=ax)
+        ax.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
+        ax.set_xlabel('Musim')
+        ax.set_ylabel('Jumlah Hari')
+        ax.set_xticks([0, 1, 2, 3], ['Spring', 'Summer', 'Fall', 'Winter'])
+        st.pyplot(fig)
+
+        # Tampilkan tabel frekuensi untuk variabel 'season'
+        st.write("Tabel Frekuensi untuk Variabel 'season':")
+        st.write(season_counts)
 
 if __name__ == "__main__":
     main()
