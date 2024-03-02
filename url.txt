@@ -1,2 +1,2 @@
-dashboard Streamlit : https://bike-sharing-buuqpzuv4wpmgwsn5uusim.streamlit.app/
+dashboard Streamlit : https://dataset-we5ngdjr5ceawtyfnsi6p8.streamlit.app/
 Github Link : https://github.com/kurniagilang/dataset.git
