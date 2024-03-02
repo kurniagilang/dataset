@@ -42,17 +42,18 @@ def main():
         st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
 
         # Visualisasi histogram
-        plt.figure(figsize=(5, 5))
-        sns.histplot(data['cnt'], bins=30, kde=True, color='green')
-        plt.title('Distribusi Jumlah Total Rental Sepeda per Hari')
-        plt.xlabel('Jumlah Total Rental Sepeda')
-        plt.ylabel('Frekuensi')
-        st.pyplot()
+        fig, ax = plt.subplots(figsize=(5, 5))
+        sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax)
+        ax.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
+        ax.set_xlabel('Jumlah Total Rental Sepeda')
+        ax.set_ylabel('Frekuensi')
+        st.pyplot(fig)
 
         # Deskripsi statistik
         cnt_stats = data['cnt'].describe()
         st.write("Deskripsi Statistik untuk Variabel 'cnt':")
         st.write(cnt_stats)
+
 
 
 if __name__ == "__main__":
