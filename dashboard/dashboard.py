@@ -44,9 +44,6 @@ def main():
             fig_weather = px.box(data, x='weathersit', y='cnt', color='weekday', title='Weather Situation vs Total Rentals (Weekday)')
             st.plotly_chart(fig_weather)
 
-            # Add space between plots
-            st.write("")
-
             # Box plot (Holiday)
             st.subheader("Box Plot: Holiday vs Total Rentals (Weekday)")
             fig_holiday = px.box(data, x='holiday', y='cnt', color='weekday', title='Holiday vs Total Rentals (Weekday)')
@@ -60,24 +57,18 @@ def main():
             fig_season.update_yaxes(title_text='Jumlah Sewa')
             st.plotly_chart(fig_season)
 
-            # Add space between plots
-            st.write("")
-
             # Figure
             st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
-            fig_hist, ax_hist = plt.subplots(figsize=(5, 5))
+            fig_hist, ax_hist = plt.subplots(figsize=(8, 6))  # Ubah ukuran plot
             sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax_hist)
             ax_hist.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
             ax_hist.set_xlabel('Jumlah Total Rental Sepeda')
             ax_hist.set_ylabel('Frekuensi')
             st.pyplot(fig_hist)
 
-            # Add space between plots
-            st.write("")
-
             # Season Counts
             st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
-            fig_count, ax_count = plt.subplots(figsize=(5, 5))
+            fig_count, ax_count = plt.subplots(figsize=(8, 6))  # Ubah ukuran plot
             sns.countplot(x='season', data=data, palette='pastel', ax=ax_count)
             ax_count.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
             ax_count.set_xlabel('Musim')
@@ -113,7 +104,7 @@ def main():
             st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
 
             # Visualisasi histogram
-            fig, ax = plt.subplots(figsize=(5, 5))
+            fig, ax = plt.subplots(figsize=(8, 6))  # Ubah ukuran plot
             sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax)
             ax.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
             ax.set_xlabel('Jumlah Total Rental Sepeda')
@@ -132,7 +123,7 @@ def main():
             season_counts = data['season'].value_counts()
 
             # Plot countplot musim
-            fig, ax = plt.subplots(figsize=(5, 5))
+            fig, ax = plt.subplots(figsize=(8, 6))  # Ubah ukuran plot
             sns.countplot(x='season', data=data, palette='pastel', ax=ax)
             ax.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
             ax.set_xlabel('Musim')
