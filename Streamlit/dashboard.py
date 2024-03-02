@@ -57,7 +57,7 @@ def main():
     # Heatmap
     elif selected_visualization == "Heatmap":
         st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
-
+        
         # Handling NaN values
         data_cleaned = data.dropna()
 
