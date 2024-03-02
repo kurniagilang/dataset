@@ -36,41 +36,8 @@ def main():
         st.subheader("Box Plot: Weather Situation vs Total Rentals")
         fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
         st.plotly_chart(fig)
-    
-    # Figure
-    elif selected_visualization == "Figure":
-        st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
 
-        # Visualisasi histogram
-        fig, ax = plt.subplots(figsize=(5, 5))
-        sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax)
-        ax.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
-        ax.set_xlabel('Jumlah Total Rental Sepeda')
-        ax.set_ylabel('Frekuensi')
-        st.pyplot(fig)
-
-        # Deskripsi statistik
-        cnt_stats = data['cnt'].describe()
-        st.write("Deskripsi Statistik untuk Variabel 'cnt':")
-        st.write(cnt_stats)
-
-    # Heatmap
-    elif selected_visualization == "Heatmap":
-        st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
-        
-        # Handling NaN values
-        data_cleaned = data.dropna()
-
-        # Hitung matriks korelasi
-        correlation_matrix = data_cleaned.corr()
-
-        # Plot heatmap korelasi
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
-        plt.title('Heatmap of Correlation between Variables in Bike Sharing Dataset (per Day)')
-        st.pyplot()
-
-    # Season Counts
+        # Season Counts
     elif selected_visualization == "Season Counts":
         st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
 
@@ -89,6 +56,48 @@ def main():
         # Tampilkan tabel frekuensi untuk variabel 'season'
         st.write("Tabel Frekuensi untuk Variabel 'season':")
         st.write(season_counts)
+
+    
+    # Figure
+    elif selected_visualization == "Figure":
+        st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
+
+        # Visualisasi histogram
+        fig, ax = plt.subplots(figsize=(5, 5))
+        sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax)
+        ax.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
+        ax.set_xlabel('Jumlah Total Rental Sepeda')
+        ax.set_ylabel('Frekuensi')
+        st.pyplot(fig)
+
+        # Deskripsi statistik
+        cnt_stats = data['cnt'].describe()
+        st.write("Deskripsi Statistik untuk Variabel 'cnt':")
+        st.write(cnt_stats)
+
+    elif selected_visualization == "Heatmap":
+        st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
+
+    # Handling NaN values and verifying data
+    st.write("Before dropping NaN values:")
+    st.write(data.head())
+
+    data_cleaned = data.dropna()
+
+    st.write("After dropping NaN values:")
+    st.write(data_cleaned.head())
+
+    try:
+        # Hitung matriks korelasi
+        correlation_matrix = data_cleaned.corr()
+
+        # Plot heatmap korelasi
+        plt.figure(figsize=(12, 8))
+        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+        plt.title('Heatmap of Correlation between Variables in Bike Sharing Dataset (per Day)')
+        st.pyplot()
+    except ValueError as e:
+        st.error(f"Error computing correlation matrix: {e}")
 
 if __name__ == "__main__":
     main()
