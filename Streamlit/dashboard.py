@@ -20,7 +20,7 @@ def main():
 
     # Sidebar
     st.sidebar.title("Bike Sharing Dashboard")
-    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot"))
+    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure"))
 
     # Main content
     st.title("Bike Sharing Dataset Analysis")
@@ -35,6 +35,12 @@ def main():
     elif selected_visualization == "Box Plot":
         st.subheader("Box Plot: Weather Situation vs Total Rentals")
         fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
+        st.plotly_chart(fig)
+    
+    # Figure
+    elif selected_visualization == "Figure":
+        st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
+        fig = px.box(data, x='weathersit', y='cnt', title='Distribusi Jumlah Total Rental Sepeda per Hari')
         st.plotly_chart(fig)
 
 
