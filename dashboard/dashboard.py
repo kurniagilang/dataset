@@ -21,7 +21,7 @@ def main():
     # Sidebar
     st.sidebar.header("**Gilang Kurnia Mandari**")
     st.sidebar.title("Bike Sharing Dashboard")
-    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot (Weather Situation)", "Box Plot (Holiday)","Box Plot (Season)", "Figure", "Season Counts"))
+    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Show All Plots", "Scatter Plot", "Box Plot (Weather Situation)", "Box Plot (Holiday)","Box Plot (Season)", "Figure", "Season Counts"))
 
     # Main content
     st.title("Bike Sharing Dataset Analysis :sparkles: :sparkles:")
@@ -29,49 +29,52 @@ def main():
     # Show all plots in one page
     if selected_visualization == "Show All Plots":
         st.subheader("All Plots")
+        
+        # Create a grid layout
+        col1, col2 = st.columns(2)
 
         # Scatter plot: Temperature vs Total Rentals (Weekday)
-        st.subheader("Scatter Plot: Temperature vs Total Rentals (Weekday)")
-        fig_scatter = px.scatter(data, x='temp', y='cnt', color='weekday', title='Temperature vs Total Rentals (Weekday)')
+        with col1:
+            st.subheader("Scatter Plot: Temperature vs Total Rentals (Weekday)")
+            fig_scatter = px.scatter(data, x='temp', y='cnt', color='weekday', title='Temperature vs Total Rentals (Weekday)')
+            st.plotly_chart(fig_scatter)
 
-        # Box plot (Weather Situation)
-        st.subheader("Box Plot: Weather Situation vs Total Rentals (Weekday)")
-        fig_weather = px.box(data, x='weathersit', y='cnt', color='weekday', title='Weather Situation vs Total Rentals (Weekday)')
+            # Box plot (Weather Situation)
+            st.subheader("Box Plot: Weather Situation vs Total Rentals (Weekday)")
+            fig_weather = px.box(data, x='weathersit', y='cnt', color='weekday', title='Weather Situation vs Total Rentals (Weekday)')
+            st.plotly_chart(fig_weather)
 
-        # Box plot (Holiday)
-        st.subheader("Box Plot: Holiday vs Total Rentals (Weekday)")
-        fig_holiday = px.box(data, x='holiday', y='cnt', color='weekday', title='Holiday vs Total Rentals (Weekday)')
+            # Box plot (Holiday)
+            st.subheader("Box Plot: Holiday vs Total Rentals (Weekday)")
+            fig_holiday = px.box(data, x='holiday', y='cnt', color='weekday', title='Holiday vs Total Rentals (Weekday)')
+            st.plotly_chart(fig_holiday)
 
-        # Box plot (Season)
-        st.subheader("Box Plot: Season vs Total Rentals (Weekday)")
-        fig_season = px.box(data, x='season', y='cnt', color='weekday', title='Season vs Total Rentals (Weekday)')
-        fig_season.update_xaxes(title_text='Musim')
-        fig_season.update_yaxes(title_text='Jumlah Sewa')
+        with col2:
+            # Box plot (Season)
+            st.subheader("Box Plot: Season vs Total Rentals (Weekday)")
+            fig_season = px.box(data, x='season', y='cnt', color='weekday', title='Season vs Total Rentals (Weekday)')
+            fig_season.update_xaxes(title_text='Musim')
+            fig_season.update_yaxes(title_text='Jumlah Sewa')
+            st.plotly_chart(fig_season)
 
-        # Figure
-        st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
-        fig_hist, ax_hist = plt.subplots(figsize=(5, 5))
-        sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax_hist)
-        ax_hist.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
-        ax_hist.set_xlabel('Jumlah Total Rental Sepeda')
-        ax_hist.set_ylabel('Frekuensi')
+            # Figure
+            st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
+            fig_hist, ax_hist = plt.subplots(figsize=(5, 5))
+            sns.histplot(data['cnt'], bins=30, kde=True, color='green', ax=ax_hist)
+            ax_hist.set_title('Distribusi Jumlah Total Rental Sepeda per Hari')
+            ax_hist.set_xlabel('Jumlah Total Rental Sepeda')
+            ax_hist.set_ylabel('Frekuensi')
+            st.pyplot(fig_hist)
 
-        # Season Counts
-        st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
-        fig_count, ax_count = plt.subplots(figsize=(5, 5))
-        sns.countplot(x='season', data=data, palette='pastel', ax=ax_count)
-        ax_count.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
-        ax_count.set_xlabel('Musim')
-        ax_count.set_ylabel('Jumlah Hari')
-        ax_count.set_xticklabels(['Spring', 'Summer', 'Fall', 'Winter'])
-
-        # Show plots
-        st.plotly_chart(fig_scatter)
-        st.plotly_chart(fig_weather)
-        st.plotly_chart(fig_holiday)
-        st.plotly_chart(fig_season)
-        st.pyplot(fig_hist)
-        st.pyplot(fig_count)
+            # Season Counts
+            st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
+            fig_count, ax_count = plt.subplots(figsize=(5, 5))
+            sns.countplot(x='season', data=data, palette='pastel', ax=ax_count)
+            ax_count.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
+            ax_count.set_xlabel('Musim')
+            ax_count.set_ylabel('Jumlah Hari')
+            ax_count.set_xticklabels(['Spring', 'Summer', 'Fall', 'Winter'])
+            st.pyplot(fig_count)
 
     else:
         # Individual plots
