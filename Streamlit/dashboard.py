@@ -37,46 +37,6 @@ def main():
         fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
         st.plotly_chart(fig)
 
-    # Plot heatmap of correlation
-    plt.figure(figsize=(12, 8))
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
-    plt.title('Heatmap of Correlation between Variables in Bike Sharing Dataset (per Day)')
-    plt.show()
-    #Histogram Distribusi Jumlah Total Rental Sepeda per Hari:
-    plt.figure(figsize=(5, 5))
-    sns.histplot(day['cnt'], bins=30, kde=True, color='green')
-    plt.title('Distribusi Jumlah Total Rental Sepeda per Hari')
-    plt.xlabel('Jumlah Total Rental Sepeda')
-    plt.ylabel('Frekuensi')
-    plt.show()
-
-    #Count Plot Distribusi Jumlah Hari Berdasarkan Musim:
-    plt.figure(figsize=(5, 5))
-    sns.countplot(x='season', data=day, palette='pastel')
-    plt.title('Distribusi Jumlah Hari Berdasarkan Musim')
-    plt.xlabel('Musim')
-    plt.ylabel('Jumlah Hari')
-    plt.xticks([0, 1, 2, 3], ['Spring', 'Summer', 'Fall', 'Winter'])
-    plt.show()
-
-    #Box Plot untuk Hubungan antara Hari Libur dan Jumlah Sewa:
-    fig = px.box(day, x='holiday', y='cnt', title='Hubungan antara Hari Libur dan Jumlah Sewa')
-    fig.update_xaxes(title_text='Hari Libur')
-    fig.update_yaxes(title_text='Jumlah Sewa')
-    fig.show()
-
-    #Box Plot untuk Hubungan antara Cuaca dan Jumlah Sewa:
-    fig = px.box(day, x='weathersit', y='cnt', title='Hubungan antara Cuaca dan Jumlah Sewa')
-    fig.update_xaxes(title_text='Cuaca')
-    fig.update_yaxes(title_text='Jumlah Sewa')
-    fig.show()
-
-    #Scatter Plot antara Suhu dan Jumlah Sewa:
-    fig = px.scatter(day, x='temp', y='cnt', title='Scatter Plot antara Suhu dan Jumlah Sewa')
-    fig.update_xaxes(title_text='Suhu (Celsius)')
-    fig.update_yaxes(title_text='Jumlah Sewa')
-    fig.show()
-
 
 if __name__ == "__main__":
     main()
