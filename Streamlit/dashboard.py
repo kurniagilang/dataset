@@ -18,7 +18,7 @@ def main():
     # Load data
     data = load_data()
 
-    #Sidebar
+    # Sidebar
     st.sidebar.title("Bike Sharing Dashboard")
     selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure", "Heatmap", "Season Counts"))
 
@@ -58,8 +58,11 @@ def main():
     elif selected_visualization == "Heatmap":
         st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
 
+        # Handling NaN values
+        data_cleaned = data.dropna()
+
         # Hitung matriks korelasi
-        correlation_matrix = data.corr()
+        correlation_matrix = data_cleaned.corr()
 
         # Plot heatmap korelasi
         plt.figure(figsize=(12, 8))
@@ -75,19 +78,17 @@ def main():
         season_counts = data['season'].value_counts()
 
         # Plot countplot musim
-        plt.figure(figsize=(5, 5))
-        sns.countplot(x='season', data=data, palette='pastel')
-        plt.title('Distribusi Jumlah Hari Berdasarkan Musim')
-        plt.xlabel('Musim')
-        plt.ylabel('Jumlah Hari')
-        plt.xticks([0, 1, 2, 3], ['Spring', 'Summer', 'Fall', 'Winter'])
-        st.pyplot()
+        fig, ax = plt.subplots(figsize=(5, 5))
+        sns.countplot(x='season', data=data, palette='pastel', ax=ax)
+        ax.set_title('Distribusi Jumlah Hari Berdasarkan Musim')
+        ax.set_xlabel('Musim')
+        ax.set_ylabel('Jumlah Hari')
+        ax.set_xticks([0, 1, 2, 3], ['Spring', 'Summer', 'Fall', 'Winter'])
+        st.pyplot(fig)
 
         # Tampilkan tabel frekuensi untuk variabel 'season'
         st.write("Tabel Frekuensi untuk Variabel 'season':")
         st.write(season_counts)
-
-
 
 if __name__ == "__main__":
     main()
