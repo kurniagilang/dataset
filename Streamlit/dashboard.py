@@ -19,14 +19,12 @@ def main():
     data = load_data()
 
     # Sidebar
-    st.header('Bike Sharing Dashboard :sparkles:')
     st.sidebar.header("**Gilang Kurnia Mandari**")
     st.sidebar.title("Bike Sharing Dashboard")
-    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure", "Heatmap", "Season Counts"))
-   
+    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure", "Season Counts"))
 
     # Main content
-    st.title("Bike Sharing Dataset Analysis")
+    st.title("Bike Sharing Dataset Analysis :sparkles: :sparkles:")
 
     # Scatter plot
     if selected_visualization == "Scatter Plot":
@@ -56,22 +54,6 @@ def main():
         cnt_stats = data['cnt'].describe()
         st.write("Deskripsi Statistik untuk Variabel 'cnt':")
         st.write(cnt_stats)
-
-    # Heatmap
-    elif selected_visualization == "Heatmap":
-        st.subheader("Heatmap: Korelasi antar Variabel dalam Dataset Penyewaan Sepeda (per Hari)")
-
-        # Handling NaN values
-        data_cleaned = data.dropna()
-
-        # Hitung matriks korelasi
-        correlation_matrix = data_cleaned.corr()
-
-        # Plot heatmap korelasi
-        plt.figure(figsize=(12, 8))
-        sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
-        plt.title('Heatmap of Correlation between Variables in Bike Sharing Dataset (per Day)')
-        st.pyplot()
 
     # Season Counts
     elif selected_visualization == "Season Counts":
