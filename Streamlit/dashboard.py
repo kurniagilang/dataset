@@ -40,8 +40,19 @@ def main():
     # Figure
     elif selected_visualization == "Figure":
         st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
-        fig = px.box(data, x='weathersit', y='cnt', title='Distribusi Jumlah Total Rental Sepeda per Hari')
-        st.plotly_chart(fig)
+
+        # Visualisasi histogram
+        plt.figure(figsize=(5, 5))
+        sns.histplot(data['cnt'], bins=30, kde=True, color='green')
+        plt.title('Distribusi Jumlah Total Rental Sepeda per Hari')
+        plt.xlabel('Jumlah Total Rental Sepeda')
+        plt.ylabel('Frekuensi')
+        st.pyplot()
+
+        # Deskripsi statistik
+        cnt_stats = data['cnt'].describe()
+        st.write("Deskripsi Statistik untuk Variabel 'cnt':")
+        st.write(cnt_stats)
 
 
 if __name__ == "__main__":
