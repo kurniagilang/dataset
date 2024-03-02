@@ -21,7 +21,7 @@ def main():
     # Sidebar
     st.sidebar.header("**Gilang Kurnia Mandari**")
     st.sidebar.title("Bike Sharing Dashboard")
-    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot", "Figure", "Season Counts"))
+    selected_visualization = st.sidebar.selectbox("Select Visualization", ("Scatter Plot", "Box Plot (Weather Situation)", "Box Plot (Holiday)", "Figure", "Season Counts"))
 
     # Main content
     st.title("Bike Sharing Dataset Analysis :sparkles: :sparkles:")
@@ -32,12 +32,18 @@ def main():
         fig = px.scatter(data, x='temp', y='cnt', title='Temperature vs Total Rentals')
         st.plotly_chart(fig)
 
-    # Box plot
-    elif selected_visualization == "Box Plot":
+    # Box plot (Weather Situation)
+    elif selected_visualization == "Box Plot (Weather Situation)":
         st.subheader("Box Plot: Weather Situation vs Total Rentals")
         fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
         st.plotly_chart(fig)
-    
+
+    # Box plot (Holiday)
+    elif selected_visualization == "Box Plot (Holiday)":
+        st.subheader("Box Plot: Holiday vs Total Rentals")
+        fig = px.box(data, x='holiday', y='cnt', title='Holiday vs Total Rentals')
+        st.plotly_chart(fig)
+
     # Figure
     elif selected_visualization == "Figure":
         st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
@@ -74,6 +80,12 @@ def main():
         # Tampilkan tabel frekuensi untuk variabel 'season'
         st.write("Tabel Frekuensi untuk Variabel 'season':")
         st.write(season_counts)
+
+    # Box plot (Season)
+    elif selected_visualization == "Box Plot (Season)":
+        st.subheader("Box Plot: Season vs Total Rentals")
+        fig = px.box(data, x='season', y='cnt', title='Season vs Total Rentals')
+        st.plotly_chart(fig)
 
 if __name__ == "__main__":
     main()
