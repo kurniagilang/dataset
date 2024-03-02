@@ -28,26 +28,26 @@ def main():
 
     # Scatter plot
     if selected_visualization == "Scatter Plot":
-        st.subheader("Scatter Plot: Temperature vs Total Rentals")
-        fig = px.scatter(data, x='temp', y='cnt', title='Temperature vs Total Rentals')
+        st.subheader("Scatter Plot: Temperature vs Total Rentals (Weekday)")
+        fig = px.scatter(data, x='temp', y='cnt', color='weekday', title='Temperature vs Total Rentals (Weekday)')
         st.plotly_chart(fig)
 
     # Box plot (Weather Situation)
     elif selected_visualization == "Box Plot (Weather Situation)":
-        st.subheader("Box Plot: Weather Situation vs Total Rentals")
-        fig = px.box(data, x='weathersit', y='cnt', title='Weather Situation vs Total Rentals')
+        st.subheader("Box Plot: Weather Situation vs Total Rentals (Weekday)")
+        fig = px.box(data, x='weathersit', y='cnt', color='weekday', title='Weather Situation vs Total Rentals (Weekday)')
         st.plotly_chart(fig)
 
     # Box plot (Holiday)
     elif selected_visualization == "Box Plot (Holiday)":
-        st.subheader("Box Plot: Holiday vs Total Rentals")
-        fig = px.box(data, x='holiday', y='cnt', title='Holiday vs Total Rentals')
+        st.subheader("Box Plot: Holiday vs Total Rentals (Weekday)")
+        fig = px.box(data, x='holiday', y='cnt', color='weekday', title='Holiday vs Total Rentals (Weekday)')
         st.plotly_chart(fig)
 
     # Box plot (Season)
     elif selected_visualization == "Box Plot (Season)":
-        st.subheader("Box Plot: Season vs Total Rentals")
-        fig = px.box(data, x='season', y='cnt', title='Season vs Total Rentals')
+        st.subheader("Box Plot: Season vs Total Rentals (Weekday)")
+        fig = px.box(data, x='season', y='cnt', color='weekday', title='Season vs Total Rentals (Weekday)')
         fig.update_xaxes(title_text='Musim')
         fig.update_yaxes(title_text='Jumlah Sewa')
         st.plotly_chart(fig)
