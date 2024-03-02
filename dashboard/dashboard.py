@@ -44,6 +44,9 @@ def main():
             fig_weather = px.box(data, x='weathersit', y='cnt', color='weekday', title='Weather Situation vs Total Rentals (Weekday)')
             st.plotly_chart(fig_weather)
 
+            # Add space between plots
+            st.write("")
+
             # Box plot (Holiday)
             st.subheader("Box Plot: Holiday vs Total Rentals (Weekday)")
             fig_holiday = px.box(data, x='holiday', y='cnt', color='weekday', title='Holiday vs Total Rentals (Weekday)')
@@ -57,6 +60,9 @@ def main():
             fig_season.update_yaxes(title_text='Jumlah Sewa')
             st.plotly_chart(fig_season)
 
+            # Add space between plots
+            st.write("")
+
             # Figure
             st.subheader("Figure: Distribusi Jumlah Total Rental Sepeda per Hari")
             fig_hist, ax_hist = plt.subplots(figsize=(5, 5))
@@ -65,6 +71,9 @@ def main():
             ax_hist.set_xlabel('Jumlah Total Rental Sepeda')
             ax_hist.set_ylabel('Frekuensi')
             st.pyplot(fig_hist)
+
+            # Add space between plots
+            st.write("")
 
             # Season Counts
             st.subheader("Season Counts: Distribusi Jumlah Hari Berdasarkan Musim")
